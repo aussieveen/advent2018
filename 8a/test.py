@@ -25,22 +25,17 @@ class Advent(unittest.TestCase):
 		# self.assertEqual(testIr.run(),'CABDFE')
 
 	def testNodeClass(self):
-		nodeclass = NodeClass([0, 3, 10, 11, 12])
-		print(nodeclass.children)
-		# self.assertEqual(nodeclass.getChildNodeCount(),0)
-		# self.assertEqual(nodeclass.getMetadataEntryCount(),3)
-		# self.assertEqual(nodeclass.sumMetaData(),33)		
+		node = Node([0, 3, 10, 11, 12])
+		self.assertEqual(node.sumMetaData(),33)
 
-		nodeclass = NodeClass([0, 1, 99])
-		print(nodeclass.children)
-		# self.assertEqual(nodeclass.getChildNodeCount(),0)
-		# self.assertEqual(nodeclass.getMetadataEntryCount(),1)
-		# self.assertEqual(nodeclass.sumMetaData(),99)
-		nodeclass = NodeClass([1, 1, 0, 1, 99, 2])
-		print(nodeclass.children)
+		node = Node([0, 1, 99])
+		self.assertEqual(node.sumMetaData(),99)
 
-		nodeclass = NodeClass([2, 3, 0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2])
-		print(nodeclass.children)
+		node = Node([1, 1, 0, 1, 99, 2])
+		self.assertEqual(node.sumMetaData(),101)
+
+		node = Node([2, 3, 0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2])
+		self.assertEqual(node.sumMetaData(),138)
 		
 
 

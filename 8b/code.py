@@ -13,7 +13,7 @@ class LicenseFile():
 
     def run(self):
         node = Node(self.list)
-        print(node.sumMetaData())
+        print(node.getRootValue())
 
 
 class Node():
@@ -25,6 +25,19 @@ class Node():
 
     def sumMetaData(self):
         return sum(self.metadata) + sum(child.sumMetaData() for child in self.children )
+
+    def getChildValue(self,childIndex):
+        if childIndex < len(self.children):
+            return self.children[childIndex].getRootValue()
+        return 0    
+
+    def getRootValue(self):
+        if not self.children:
+            return sum(self.metadata)
+        total = 0
+        for index in self.metadata:
+            total = total + self.getChildValue(index - 1)
+        return total
 
 if __name__ == '__main__':
     # Map command line arguments to function arguments.
