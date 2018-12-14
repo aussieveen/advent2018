@@ -38,12 +38,10 @@ class InstructionRunner():
         workInProgress = []
         while True:
             # find instructions that can be done
-            print("WORK REMAINING = " + str(self.allNodes))
             for child,parents in self.allNodes.items():
                 if (not parents and child not in canDoInstructions):
                     canDoInstructions.append(child)
             canDoInstructions = sorted(canDoInstructions)
-            print("CDI = " + str(canDoInstructions))
 
             #assign instructions to workers
             for instruction in canDoInstructions:
@@ -52,8 +50,6 @@ class InstructionRunner():
                         self.workers[index] = {'instruction':instruction, "time": self.instructionTime(instruction) }
                         workInProgress.append(instruction)
                         break
-            print("WORKERS = " + str(self.workers))
-            print("workInProgress = " + str(workInProgress))            
 
             # get task(s) that will finish next
             nextFinishedWorker = []
@@ -70,8 +66,6 @@ class InstructionRunner():
                     nextFinishedWorker.append(index)
             # complete next tasks
 
-            print("NFW = " + str(nextFinishedWorker))
-            print("NIFN = " + str(nextInstructionFinishedIn))
             for index,worker in enumerate(self.workers):
                 if not worker:
                     continue
@@ -92,9 +86,8 @@ class InstructionRunner():
                     workInProgress.remove(worker['instruction'])  
                 else:
                     worker['time'] -= nextInstructionFinishedIn
-            print("                                                         ")
             if not self.allNodes:
-                print(runningTime)
+                print (runningTime)
                 return runningTime
 
     def instructionTime(self,instruction):
