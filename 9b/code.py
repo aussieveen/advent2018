@@ -19,24 +19,17 @@ class MarbleGame():
 
     def playGame(self):
         # set up initial state of the game
-        gameState = [0]
+        gameState = deque([0])
         index = 0
         scores = defaultdict(int)
         for marble in range(1,self.numOfMarbles+1):
             if (marble % 23 == 0):
-                index -= 7
-                if (index < 0):
-                    index = len(gameState) + index
-                scores[marble % self.numOfPlayers] += gameState[index]+marble
-                del(gameState[index])
+                gameState.rotate(-7)
+                scores[marble % self.numOfPlayers] += gameState.pop()+marble
                 continue
 
-
-            if (index == len(gameState)-1 ):
-                index = 1
-            else:
-                index += 2    
-            gameState.insert(index,marble)
+            gameState.rotate(2)
+            gameState.append(marble)    
 
         # circle = deque([0])
 
